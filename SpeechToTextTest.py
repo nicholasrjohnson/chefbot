@@ -1,15 +1,23 @@
 import queue
 import re
 import sys
+import os
+import io
 
 from google.cloud import speech
 
 import pyaudio
 
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'api_key.json'
+
+
 # Audio recording parameters
 RATE = 16000
-CHUNK = int(RATE / 10)  # 100ms
-
+RESPEAKER_CHANNELS = 1 
+RESPEAKER_WIDTH = 2
+# run getDeviceInfo.py to get index
+RESPEAKER_INDEX = 1  # refer to input device id
+CHUNK = 1024
 
 class MicrophoneStream:
     """Opens a recording stream as a generator yielding the audio chunks."""
@@ -26,12 +34,13 @@ class MicrophoneStream:
     def __enter__(self: object) -> object:
         self._audio_interface = pyaudio.PyAudio()
         self._audio_stream = self._audio_interface.open(
-            format=pyaudio.paInt16,
+            format=self._audio_interface.get_format_from_width(RESPEAKER_WIDTH),
             # The API currently only supports 1-channel (mono) audio
             # https://goo.gl/z757pE
-            channels=1,
-            rate=self._rate,
+            channels=RESPEAKER_CHANNELS,
+            rate=RATE,
             input=True,
+            input_device_index=RESPEAKER_INDEX,
             frames_per_buffer=self._chunk,
             # Run the audio stream asynchronously to fill the buffer object.
             # This is necessary so that the input device's buffer doesn't
