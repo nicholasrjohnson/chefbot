@@ -6,3 +6,8 @@ Therefore, I will probably be spending some time on this soonish. I need to keep
 https://wiki.seeedstudio.com/ReSpeaker_2_Mics_Pi_HAT_Raspberry/
 
 https://www.amazon.com/CQRobot-JST-PH2-0-Interface-Electronic-Projects/dp/B0738NLFTG/ref=sr_1_3?crid=2MCHOS7BVRZNK&keywords=robot+speaker&qid=1706527597&sprefix=%2Caps%2C338&sr=8-3
+
+The project will use character.ai and an interface to it in Python to have multiple characters talking with one another. Seems pretty cool!
+
+https://duckduckgo.com/?q=character.ai+api&t=newext&atb=v403-1&ia=web
+
